@@ -1,0 +1,25 @@
+https://betterstack.com/community/questions/python-how-to-randomly-select-list-item/
+: To randomly choose an element from a list
+https://stackoverflow.com/questions/6088077/how-to-get-a-random-number-between-a-float-range:
+: To choose whether to follow the greedy or the epsilon
+Also used ChatGPT to find code graph plotting
+Most of the other knowledge was used basically from the numpy official resource you gave.
+The following is a brief description of my code:
+1) I first create the agent. the function reward(a) takes as the input 0,1,2,3,4 as the choice of the button and returns the reward on the basis of the distributions given.
+2) This defines variables like epsilon, values (which stores the current estimate of the value of the value of the action) (In this case the value of the action is not estimated till the end of the episode, since for the multi armed bandit problem, immediate reward serves as a measure of future rewards in comparisons, because the next state is same regardless of the action)
+values have a high initial value so that the program is forced to explore unexplored avenues at least once
+value_counter stores how many instances of the action we have seen. 
+rewards obviously stores the rewards of each episode
+options is just a convenient way to choose any action randomly for later.
+3) I will be running 10000 episodes.
+Each episode has a rwd defined in which we keep adding the reward we get
+In each timestep in the episode we find the meximum value and store in indices the indices for which it is the maximum.
+Then we take any one of those indices with probability 1-epsilon and any random one with probability epsilon 
+4) Then I apply the necessary changes to the values, value_counter, and rewards.
+
+
+After seeing the graph, I realised that the variance of the data is too much, for example, the epsilon equals zero strategy varies a lot on the basis of what strategy it thinks is good in the start.
+Thus, I had to do this process multiple times and take the average of all those trainings to see the solution. With more and more iterations you can see the evolution of the plot. As you can see the epsilon equals zero strategy does badly because it often gets stuck on the wrong strategy. Finally the epsilon equals 0.01 strategy does better because it explores less and uses the better strategy most of the time. However it also takes slightly longer than epsilon equals 0.1 to find the best strategy and stabilise in it as can be seen from the graph.
+
+
+
